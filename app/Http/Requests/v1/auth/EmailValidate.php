@@ -18,6 +18,6 @@ trait EmailValidate
     public function getRule($username):array
     {
         if ($username)
-            return ['username' => 'required|en\mail'];
+            return ['username' => 'required|email'];
     }
 }

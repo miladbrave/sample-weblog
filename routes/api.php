@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'auth'],function (){
-    Route::post('login', '\ApiV1\Authenticate\LoginController');
+    Route::post('login', 'App\Http\Controllers\ApiV1\Authenticate\LoginController');
+    Route::post('register', 'App\Http\Controllers\ApiV1\Authenticate\RegisterController');
 });
