@@ -2,9 +2,14 @@
 
 namespace App\Repositories\Interfaces;
 
+use App\Models\Post;
+
 interface PostRepositoriesInterface
 {
     public function showAllPosts();
 
-    public function createPost();
+    public function createPost($data);
+
+    public function postSyncTags(Post $post,$tags);
+
 }

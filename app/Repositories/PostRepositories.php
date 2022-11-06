@@ -19,8 +19,13 @@ class PostRepositories extends BaseRepository implements PostRepositoriesInterfa
         return $this->query()->paginate(20);
     }
 
-    public function createPost()
+    public function createPost($data)
     {
+        return $this->query()->create($data);
+    }
 
+    public function postSyncTags(Post $post,$tags)
+    {
+        return  $post->Tags()->sync($tags);
     }
 }

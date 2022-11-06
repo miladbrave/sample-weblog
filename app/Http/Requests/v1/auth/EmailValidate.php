@@ -8,7 +8,7 @@ trait EmailValidate
 {
     public function checkType()
     {
-        $type = checkType($this->input('username'));
+        $type = checkEmail($this->input('username'));
         if (!$type)
             throw ValidationException::withMessages(['email' => 'invalid date']);
 

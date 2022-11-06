@@ -24,8 +24,8 @@ class LoginController extends Controller
 
     public function __invoke(LoginRequest $request)
     {
-        $email = $request->input('username');
-
+        $data = $request->validated();
+        $email = $data['username'];
         $user = $this->userRepositories->findUserByEmail($email);
 
         if (!$user)

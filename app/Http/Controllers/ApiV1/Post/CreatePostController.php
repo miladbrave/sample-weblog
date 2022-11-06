@@ -23,5 +23,15 @@ class createPostController extends Controller
     public function __invoke(CreateRequest $request)
     {
 
+        $post = $this->postRepositories->createPost([
+            'title'         => $request->input("title"),
+            'description'   => $request->input("description"),
+            'category_id'   => $request->input('category_id'),
+            'user_id'       => auth()->id(),
+        ]);
+
+        $tags = $request->input('tags');
+        $this->postRepositories->postSyncTags($post,$tags);
+
     }
 }
