@@ -13,7 +13,7 @@ class CreateRequest extends FormRequest
             'title' => 'required|string',
             'description' => 'required',
             'tags' => 'required|array',
-            'categories' => 'required|array',
+            'category' => 'required|numeric',
             'image' => 'nullable|mime',
         ];
     }

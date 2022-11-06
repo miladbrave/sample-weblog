@@ -7,13 +7,13 @@ use App\Repositories\Interfaces\PostRepositoriesInterface;
 use App\Traits\PublicJsonResponse;
 use Illuminate\Http\Request;
 
-class indexController extends Controller
+class IndexController extends Controller
 {
     use PublicJsonResponse;
 
     private $postRepositories;
 
-    public function __constructor(PostRepositoriesInterface $postRepositories)
+    public function __construct(PostRepositoriesInterface $postRepositories)
     {
         $this->postRepositories = $postRepositories;
     }

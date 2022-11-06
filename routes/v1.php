@@ -7,9 +7,9 @@ Route::group(['prefix' => 'auth'],function (){
     Route::post('register', 'Authenticate\RegisterController');
 });
 
-Route::group(['prefix' => 'post'],function (){
+Route::group(['prefix' => 'posts','middleware' => 'auth:sanctum'],function (){
     Route::get('/', 'Post\indexController');
-    Route::post('/create', 'App\Http\Controllers\ApiV1\Authenticate\RegisterController');
+    Route::post('/create-post', 'Post\CreatePostController');
     Route::get('/edit/{slug}', 'App\Http\Controllers\ApiV1\Authenticate\RegisterController');
     Route::put('/update/}', 'App\Http\Controllers\ApiV1\Authenticate\RegisterController');
 });
