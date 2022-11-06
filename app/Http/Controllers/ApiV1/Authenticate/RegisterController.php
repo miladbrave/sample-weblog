@@ -5,10 +5,11 @@ namespace App\Http\Controllers\ApiV1\Authenticate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\auth\RegisterRequest;
 use App\Repositories\Interfaces\UserRepositoriesInterface;
-use Illuminate\Http\Request;
+use App\Traits\PublicJsonResponse;
 
 class RegisterController extends Controller
 {
+    use PublicJsonResponse;
 
     private UserRepositoriesInterface $userRepositories;
 

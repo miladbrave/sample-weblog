@@ -15,7 +15,6 @@ class LoginController extends Controller
 {
     use PublicJsonResponse;
 
-
     private UserRepositoriesInterface $userRepositories;
 
     public function __constructor(UserRepositoriesInterface $userRepositories)
