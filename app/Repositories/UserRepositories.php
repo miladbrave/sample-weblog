@@ -20,15 +20,8 @@ class UserRepositories extends BaseRepository implements UserRepositoriesInterfa
         return $this->query()->where('email',$email)->first();
     }
 
-    public function getCurrentUser()
+    public function createUser($data)
     {
-        return auth("sanctum")->user();
-    }
-
-    public function makePassword($password)
-    {
-        return $this->query()->update([
-            'password' => Hash::make($password)
-        ]);
+        return $this->query()->create($data);
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'],function (){
-    Route::post('login', 'Authenticate\RegisterController');
+    Route::post('login', 'Authenticate\LoginController');
     Route::post('register', 'Authenticate\RegisterController');
 });
 

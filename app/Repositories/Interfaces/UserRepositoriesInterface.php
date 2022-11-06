@@ -6,7 +6,5 @@ interface UserRepositoriesInterface
 {
     public function findUserByEmail($email);
 
-    public function getCurrentUser();
-
-    public function makePassword($password);
+    public function createUser($data);
 }

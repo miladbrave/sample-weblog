@@ -48,10 +48,6 @@ class Handler extends ExceptionHandler
             return $this->messageResponse('مقداری یافت نشد.', 404,false);
         }
 
-        if ($e instanceof ValidationException ) {
-            return $this->validationResponse($e);
-        }
-
         return parent::render($request, $e);
     }
 }

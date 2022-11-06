@@ -17,7 +17,7 @@ class LoginController extends Controller
 
     private UserRepositoriesInterface $userRepositories;
 
-    public function __constructor(UserRepositoriesInterface $userRepositories)
+    public function __construct(UserRepositoriesInterface $userRepositories)
     {
         $this->userRepositories = $userRepositories;
     }
@@ -25,7 +25,7 @@ class LoginController extends Controller
     public function __invoke(LoginRequest $request)
     {
         $data = $request->validated();
-        $email = $data['username'];
+        $email = $data['email'];
         $user = $this->userRepositories->findUserByEmail($email);
 
         if (!$user)

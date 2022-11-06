@@ -9,7 +9,7 @@ class UserResource extends JsonResource
 
     private $role;
 
-    public function __constructor($user, $role)
+    public function __construct($user, $role)
     {
         parent::__construct($user);
         $this->role = $role;
@@ -17,11 +17,13 @@ class UserResource extends JsonResource
 
     public function toArray($request)
     {
+
+        $item = $this->resource;
+
         return [
-            "id" => $request->id,
-            "name" => $request->name,
-            "email" => $request->email,
-            "score" => $request->score,
+            "id" => $item->id,
+            "name" => $item->name,
+            "email" => $item->email,
             "role" => $this->role,
         ];
     }
