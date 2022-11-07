@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
-interface UserRepositoriesInterface
+use App\Core\Repositories\BaseRepositoryInterface;
+
+interface UserRepositoriesInterface extends BaseRepositoryInterface
 {
     public function findUserByEmail($email);
 

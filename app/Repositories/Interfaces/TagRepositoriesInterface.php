@@ -3,7 +3,9 @@
 namespace App\Repositories\Interfaces;
 
 
-interface TagRepositoriesInterface
+use App\Core\Repositories\BaseRepositoryInterface;
+
+interface TagRepositoriesInterface extends BaseRepositoryInterface
 {
 
     public function createOrUpdateTags($tags);

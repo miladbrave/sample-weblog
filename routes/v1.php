@@ -14,4 +14,4 @@ Route::group(['prefix' => 'posts','middleware' => 'auth:sanctum'],function (){
     Route::delete('/delete/{slug}', 'Post\DeletePostController');
 });
 
-Route::post('/to-change-role', 'Teacher\ChangeRoleController');
+Route::post('/to-change-role', 'General\ChangeRoleController');

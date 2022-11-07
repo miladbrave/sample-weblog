@@ -33,7 +33,7 @@ class CreatePostController extends Controller
             abort(403,'Access Denied');
         }
         try {
-
+            DB::beginTransaction();
             $post = $this->postRepositories->createPost([
                 'title' => $request->input("title"),
                 'description' => $request->input("description"),
@@ -50,7 +50,6 @@ class CreatePostController extends Controller
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             logger()->error("Error during insert course : ", ["exception" => $exception]);
             return $this->messageResponse("There was a problem saving the post. Please try again.");
         }

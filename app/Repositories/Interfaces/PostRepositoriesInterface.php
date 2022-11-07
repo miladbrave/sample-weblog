@@ -2,9 +2,10 @@
 
 namespace App\Repositories\Interfaces;
 
+use App\Core\Repositories\BaseRepositoryInterface;
 use App\Models\Post;
 
-interface PostRepositoriesInterface
+interface PostRepositoriesInterface extends BaseRepositoryInterface
 {
     public function showAllPosts();
 
