@@ -8,6 +8,7 @@ use App\Repositories\Interfaces\PostRepositoriesInterface;
 use App\Repositories\Interfaces\TagRepositoriesInterface;
 use App\Traits\PublicJsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class EditPostController extends Controller
@@ -16,10 +17,11 @@ class EditPostController extends Controller
 
     private PostRepositoriesInterface $postRepositories;
     private TagRepositoriesInterface $tagRepositories;
-    public function __construct(PostRepositoriesInterface $postRepositories,TagRepositoriesInterface $tagRepositories)
+
+    public function __construct(PostRepositoriesInterface $postRepositories, TagRepositoriesInterface $tagRepositories)
     {
-            $this->postRepositories = $postRepositories;
-            $this->tagRepositories = $tagRepositories;
+        $this->postRepositories = $postRepositories;
+        $this->tagRepositories = $tagRepositories;
     }
 
 
@@ -27,13 +29,16 @@ class EditPostController extends Controller
     {
         $post = $this->postRepositories->getPostWithSlug($request['slug']);
 
-        $this->postRepositories->updateById($post->id,[
-            'title'         => $request->input("title"),
-            'description'   => $request->input("description"),
-            'category_id'   => $request->input('category'),
-            'slug'          =>Str::slug($request->input("title")),
-            'user_id'       => auth()->id(),
-            'image'         => 1,
+        if (!Gate::allows('update-post', [$post,auth()->user()])) {
+            return $this->messageResponse("Access Denied");
+        }
+        $this->postRepositories->updateById($post->id, [
+            'title' => $request->input("title"),
+            'description' => $request->input("description"),
+            'category_id' => $request->input('category'),
+            'slug' => Str::slug($request->input("title")),
+            'user_id' => auth()->id(),
+            'image' => 1,
         ]);
 
         $tags = $request->input('tags');

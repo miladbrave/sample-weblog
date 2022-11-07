@@ -10,6 +10,7 @@ use App\Repositories\TagRepositories;
 use App\Traits\PublicJsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class CreatePostController extends Controller
@@ -29,6 +30,9 @@ class CreatePostController extends Controller
     public function __invoke(CreateRequest $request)
     {
         try {
+            if (! Gate::allows('create-post',auth()->user())) {
+                return $this->messageResponse("Access Denied");
+            }
             $post = $this->postRepositories->createPost([
                 'title' => $request->input("title"),
                 'description' => $request->input("description"),
