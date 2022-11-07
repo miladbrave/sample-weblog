@@ -31,6 +31,6 @@ class PostRepositories extends BaseRepository implements PostRepositoriesInterfa
 
     public function getPostWithSlug($value)
     {
-        $this->query()->where('slug',$value)->first();
+        return $this->query()->where('slug',$value)->first();
     }
 }

@@ -45,7 +45,7 @@ class CreatePostController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
             logger()->error("Error during insert course : ", ["exception" => $exception]);
-            return $this->messageResponse("There was a problem saving the course. Please try again.");
+            return $this->messageResponse("There was a problem saving the post. Please try again.");
         }
 
 
