@@ -17,4 +17,6 @@ interface PostRepositoriesInterface extends BaseRepositoryInterface
 
     public function uploadImage($post,$request);
 
+    public function removePostImage($id);
+
 }

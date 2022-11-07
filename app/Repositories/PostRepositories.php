@@ -38,4 +38,9 @@ class PostRepositories extends BaseRepository implements PostRepositoriesInterfa
     {
         return uploadImage($request->file('image'),$post->user_id,null,$post,'post'.$post->id,'public');
     }
+
+    public function removePostImage($id)
+    {
+        removeImage($id,'public');
+    }
 }

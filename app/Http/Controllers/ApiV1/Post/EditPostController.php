@@ -42,8 +42,10 @@ class EditPostController extends Controller
             'description' => $request->input("description"),
             'category_id' => $request->input('category'),
             'user_id' => auth()->id(),
-            'image' => 1,
         ]);
+
+        if ($request->file('image'))
+            $this->postRepositories->uploadImage($post,$request);
 
         $tags = $request->input('tags');
         $tags_id = $this->tagRepositories->createOrUpdateTags($tags);

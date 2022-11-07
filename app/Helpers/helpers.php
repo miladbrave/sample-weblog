@@ -59,3 +59,17 @@ if (!function_exists("uploadImage")) {
         return "";
     }
 }
+
+if (!function_exists("removeImage")) {
+    function removeImage($id,$disk = 'public')
+    {
+        $file = File::findOrFail($id);
+
+        if ($file) {
+            Storage::disk($disk)->delete($file->path);
+            $file->delete();
+            return true;
+        }
+        return false;
+    }
+}
