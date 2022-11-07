@@ -28,4 +28,9 @@ class PostRepositories extends BaseRepository implements PostRepositoriesInterfa
     {
         return  $post->Tags()->sync($tags);
     }
+
+    public function getPostWithSlug($value)
+    {
+        $this->query()->where('slug',$value)->first();
+    }
 }

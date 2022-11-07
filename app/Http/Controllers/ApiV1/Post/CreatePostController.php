@@ -10,6 +10,7 @@ use App\Repositories\TagRepositories;
 use App\Traits\PublicJsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CreatePostController extends Controller
 {
@@ -32,6 +33,7 @@ class CreatePostController extends Controller
                 'title' => $request->input("title"),
                 'description' => $request->input("description"),
                 'category_id' => $request->input('category'),
+                'slug' =>Str::slug($request->input("title")),
                 'user_id' => auth()->id(),
                 'image' => 1,
             ]);
@@ -42,7 +44,6 @@ class CreatePostController extends Controller
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             logger()->error("Error during insert course : ", ["exception" => $exception]);
             return $this->messageResponse("There was a problem saving the course. Please try again.");
         }

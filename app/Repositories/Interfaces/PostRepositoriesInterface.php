@@ -12,4 +12,6 @@ interface PostRepositoriesInterface
 
     public function postSyncTags(Post $post,$tags);
 
+    public function getPostWithSlug($slug);
+
 }
