@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\ApiV1\General;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v1\teacher\ToChangeRoleRequest;
+use App\Http\Requests\v1\General\ToChangeRoleRequest;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoriesInterface;
 use App\Traits\PublicJsonResponse;
-use Illuminate\Support\Facades\DB;
 
 class ChangeRoleController extends Controller
 {

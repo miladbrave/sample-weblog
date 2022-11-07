@@ -15,4 +15,8 @@ Route::group(['prefix' => 'posts','middleware' => 'auth:sanctum'],function (){
     Route::delete('/remove-image/{id}', 'Post\DeletePostController');
 });
 
+Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'],function (){
+   Route::get('/','Profile/IndexController');
+});
+
 Route::post('/to-change-role', 'General\ChangeRoleController');
