@@ -29,6 +29,7 @@ class DeletePostController extends Controller
         if (!Gate::allows('delete-post', [$post, auth()->user()])) {
             abort(403, "Access Denied");
         }
+
         $this->postRepositories->deleteById($postId);
 
         return $this->messageResponse('post deleted', 200);
