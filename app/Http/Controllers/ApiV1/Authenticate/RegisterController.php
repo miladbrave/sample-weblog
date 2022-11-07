@@ -36,7 +36,7 @@ class RegisterController extends Controller
             $user = $this->userRepositories->findUserByEmail($request->input('email'));
 
             if (!$user)
-                throw ValidationException::withMessages(["all" => ["There is not user"]]);
+                throw ValidationException::withMessages(["email" => ["There is not user"]]);
 
             $token = @$user->createToken('API');
             $data = [

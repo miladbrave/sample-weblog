@@ -14,7 +14,7 @@ class CreateRequest extends FormRequest
             'description' => 'required',
             'tags' => 'required|array',
             'category' => 'required|numeric',
-            'image' => 'nullable|mime',
+            'image' => 'nullable|mimes:jpg,bmp,png,jpeg',
         ];
     }
 }

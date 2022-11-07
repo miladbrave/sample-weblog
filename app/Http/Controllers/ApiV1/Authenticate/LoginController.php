@@ -29,10 +29,10 @@ class LoginController extends Controller
         $user = $this->userRepositories->findUserByEmail($email);
 
         if (!$user)
-            throw ValidationException::withMessages(['username' => 'user not found']);
+            throw ValidationException::withMessages(['email' => 'user not found']);
 
         if (!Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages(["all" => ["These credentials do not match our records"]]);
+            throw ValidationException::withMessages(["email" => ["These credentials do not match our records"]]);
         }
 
         $token = $user->createToken('API');

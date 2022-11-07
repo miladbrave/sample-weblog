@@ -6,6 +6,7 @@ use App\Traits\PublicJsonResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -41,11 +42,15 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         if ($e instanceof NotFoundHttpException) {
-            return $this->messageResponse('آیتم پیدا نشد', 404,false);
+            return $this->messageResponse('Not Found', 404,false);
         }
 
         if ($e instanceof ModelNotFoundException) {
-            return $this->messageResponse('مقداری یافت نشد.', 404,false);
+            return $this->messageResponse('Not Found', 404,false);
+        }
+
+        if ($e instanceof HttpException) {
+            return $this->messageResponse('Access Denied', 403,false);
         }
 
         return parent::render($request, $e);

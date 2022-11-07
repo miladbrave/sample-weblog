@@ -33,4 +33,9 @@ class PostRepositories extends BaseRepository implements PostRepositoriesInterfa
     {
         return $this->query()->where('slug',$value)->first();
     }
+
+    public function uploadImage($post,$request)
+    {
+        return uploadImage($request->file('image'),$post->user_id,null,$post,'post'.$post->id,'public');
+    }
 }

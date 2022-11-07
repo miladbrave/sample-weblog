@@ -10,6 +10,7 @@ use App\Traits\PublicJsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class EditPostController extends Controller
 {
@@ -25,18 +26,21 @@ class EditPostController extends Controller
     }
 
 
-    public function __invoke(EditPostRequest $request)
+    public function __invoke(EditPostRequest $request, $slug)
     {
-        $post = $this->postRepositories->getPostWithSlug($request['slug']);
+        $post = $this->postRepositories->getPostWithSlug($slug);
 
-        if (!Gate::allows('update-post', [$post,auth()->user()])) {
-            return $this->messageResponse("Access Denied");
+        if (!$post)
+            throw new NotFoundHttpException('Not Found');
+
+
+        if (!Gate::allows('update-post', [$post, auth()->user()])) {
+            abort(403, "Access Denied");
         }
         $this->postRepositories->updateById($post->id, [
             'title' => $request->input("title"),
             'description' => $request->input("description"),
             'category_id' => $request->input('category'),
-            'slug' => Str::slug($request->input("title")),
             'user_id' => auth()->id(),
             'image' => 1,
         ]);

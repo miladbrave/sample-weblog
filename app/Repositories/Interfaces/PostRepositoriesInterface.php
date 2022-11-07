@@ -14,4 +14,6 @@ interface PostRepositoriesInterface
 
     public function getPostWithSlug($slug);
 
+    public function uploadImage($post,$request);
+
 }

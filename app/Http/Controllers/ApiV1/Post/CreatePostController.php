@@ -29,18 +29,20 @@ class CreatePostController extends Controller
 
     public function __invoke(CreateRequest $request)
     {
+        if (! Gate::allows('create-post',auth()->user())) {
+            abort(403,'Access Denied');
+        }
         try {
-            if (! Gate::allows('create-post',auth()->user())) {
-                return $this->messageResponse("Access Denied");
-            }
+
             $post = $this->postRepositories->createPost([
                 'title' => $request->input("title"),
                 'description' => $request->input("description"),
                 'category_id' => $request->input('category'),
                 'slug' =>Str::slug($request->input("title")),
                 'user_id' => auth()->id(),
-                'image' => 1,
             ]);
+
+            $this->postRepositories->uploadImage($post,$request);
 
             $tags = $request->input('tags');
             $tags_id = $this->tagRepositories->createOrUpdateTags($tags);
@@ -48,6 +50,7 @@ class CreatePostController extends Controller
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
+            dd($exception);
             logger()->error("Error during insert course : ", ["exception" => $exception]);
             return $this->messageResponse("There was a problem saving the post. Please try again.");
         }

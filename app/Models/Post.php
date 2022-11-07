@@ -11,7 +11,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'category_id', 'user_id', 'image', 'slug'];
+    protected $fillable = ['title', 'description', 'category_id', 'user_id', 'slug'];
 
     public function user()
     {
@@ -26,5 +26,10 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function file()
+    {
+        return $this->morphMany(File::class,'fileable');
     }
 }
